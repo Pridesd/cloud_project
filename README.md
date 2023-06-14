@@ -1,2 +1,2 @@
-"# cloud_project"  git init git add README.md git commit -m "first commit" git branch -M main git remote add origin https://github.com/Pridesd/cloud_project.git git push -u origin main
-"# cloud_project" 
+
+클라우드 프로그래밍 기말고사 대체 과제입니다.
