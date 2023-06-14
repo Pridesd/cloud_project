@@ -37,6 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'cloudsea_predict',
+    'hiking_routes',
+    'hiking_weather',
+    'single_pages',
 ]
 
 MIDDLEWARE = [
