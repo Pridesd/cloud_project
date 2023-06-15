@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'hiking_routes',
     'hiking_info',
     'single_pages',
+    'account',
 ]
 
 MIDDLEWARE = [
