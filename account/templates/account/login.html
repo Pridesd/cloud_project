@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link href="{% static 'image/amada_white.png' %}" rel="shortcut icon" type="image/x-icon">
+    <title>login</title>
+</head>
+<body class="login-container">
+    {% if user.is_authenticated %}
+        <div class="notice-block">
+            <h1>이미 로그인 되어있습니다</h1>
+            <a href="/" class="header-nav-anchor">메인으로 돌아가기</a>
+        </div>
+    {% else %}
+        <div class="login-formbox">
+            <h1>Login</h1>
+            {% include "base/form_error.html" %}
+            <form class="login-form" method="post" action={% url 'account:login' %}>
+                {% csrf_token %}
+                <div class="login-input-box">
+                    <label for="username">ID</label>
+                    <input type="text" id="username" name="username">
+                </div>
+                <div class="login-input-box">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password">
+                </div>
+                <button class="btn" type="submit">로그인</button>
+            </form>
+            <a class="account-btn" href="/account/signup/">계정이 없으세요?</a>
+        </div>
+    {% endif %}
+</body>
+</html>
