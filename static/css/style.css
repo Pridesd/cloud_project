@@ -1,0 +1,26 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+.container{
+    padding-top: 5rem;
+    height: auto;
+    min-height: 67%;
+    padding-bottom: 10rem;
+}
+
+.header{
+    height: 5rem;
+    width: 100%;
+    position: fixed;
+}
+
+.footer{
+    background-color: rgba(0, 0, 0, 0.1);
+    height: 10rem;
+    width: 100%;
+    position : relative;
+    transform : translateY(-100%);
+}
