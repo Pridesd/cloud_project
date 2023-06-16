@@ -1,0 +1,32 @@
+.hiking-info-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.hiking-info-list{
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 5rem;
+}
+
+.hiking-info-el{
+    position: relative;
+    width: 300px;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hiking-info-el:hover .hiking-info-icon{
+    width: 130px;
+}
+
+.hiking-info-icon{
+    width: 100px;
+    transition: all 0.5s ease-in;
+}

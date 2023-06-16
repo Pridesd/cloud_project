@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gugi&display=swap');
 @import "account.css";
 @import "intro.css";
+@import "hiking_info.css";
 
 *{
     font-family: 'Black Han Sans', sans-serif;

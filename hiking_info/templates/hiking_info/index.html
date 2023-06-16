@@ -1,10 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    하이킹 정보
-</body>
-</html>
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block main_area %}
+    <div class="hiking-info-container">
+        <h1>산행에 필요한 산행 정보를 알려드려요!</h1>
+        <div class="hiking-info-list">
+            <a href="today/" class="hiking-info-el">
+                <img src="{% static 'base/icons/wind-solid.svg' %}" class="hiking-info-icon">
+                <p>오늘의 날씨</p>
+            </a>
+            <a href="forecast/" class="hiking-info-el">
+                <img src="{% static 'base/icons/temperature-half-solid.svg' %}" class="hiking-info-icon">
+                <p>기상 예보</p>
+            </a>
+            <a href="cloudsea/" class="hiking-info-el">
+                <img src="{% static 'base/icons/cloud-sun-solid.svg' %}" class="hiking-info-icon">
+                <p>내일의 운해</p>
+            </a>
+        </div>
+    </div>
+{% endblock %}
