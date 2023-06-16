@@ -1,5 +1,17 @@
 {% extends 'base/base.html' %}
+{% load static %}
 
 {% block main_area %}
-
+    {% if user.is_authenticated %}
+    {% else %}
+        <div class="intro-box">
+            <img class="intro-image" src="{% static 'base/image/amada_black.png' %}" height="250px">
+            <p class="intro-slogan">
+                깨끗한 산, 깨끗한 마음
+            </p>
+            <p class="intro-desc">
+                Amada Club과 함께 산 친구를 찾아보세요!
+            </p>
+        </div>
+    {% endif %}
 {% endblock %}
