@@ -1,0 +1,39 @@
+@keyframes intro {
+    0%{
+        opacity: 0;
+    }
+    50%{
+        opacity: 0.7;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+
+.intro-box{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.intro-image{
+    opacity: 0;
+    animation: intro 1s 1s forwards;
+}
+
+.intro-slogan{
+    margin: 1rem;
+    margin-top: -1rem;
+    opacity: 0;
+    font-size: 2.5rem;
+    animation: intro 1s 2s forwards;
+}
+
+.intro-desc{
+    opacity: 0;
+    animation-delay: 2s;
+    animation: intro 2s 3s forwards;
+}
