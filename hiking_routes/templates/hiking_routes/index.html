@@ -2,7 +2,10 @@
 {% load static %}
 
 {% block main_area %}
-    <div>
+    <div class="hiking-route-main-container">
         <h1>산에 갈 친구를 모아보세요!</h1>
+        {% for post in posts %}
+            <a href="{{ post.get_absolute_url }}"><h2>{{ post.title }}</h2></a>
+        {% endfor %}
     </div>
 {% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block main_area %}
+    <div>
+        <form enctype="multipart/form-data" action="{% url 'update_post' post.pk %}">
+            {% csrf_token %}
+
+        </form>
+    </div>
+{% endblock %}
