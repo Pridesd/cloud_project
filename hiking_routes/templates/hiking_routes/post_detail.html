@@ -3,4 +3,5 @@
 
 {% block main_area %}
     <h1>{{ post.title }}</h1>
+    <a href="{% url 'participate' post.pk %}">참여하기</a>
 {% endblock %}

@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 
-from .models import Post
+from .models import Post, Participate
 
 
 # Create your views here.
@@ -50,6 +50,17 @@ def update_post(request, pk):
     return None
 
 def delete_post(request, pk):
-    deleted_post = Post.objects.get(id=id)
+    deleted_post = Post.objects.get(pk=pk)
     deleted_post.delete()
     return redirect('/routes/')
+
+def participate(request, pk):
+    post = Post.objects.get(pk=pk)
+    if request.user.is_authenticated and request.user != post.author:
+        part = Participate()
+        part.post = post
+        part.author = request.user
+        part.save()
+        return redirect('detail', pk)
+    return redirect('detail', pk)
+
