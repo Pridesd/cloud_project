@@ -1,8 +1,33 @@
 {% extends 'base/base.html' %}
 {% load static %}
 {% block main_area %}
-    <div>
-    헬로
-</div>
-{{ is_cloudsea }}
+    <div class="info-today-container">
+        <h1>
+        {{ tomorrow }}
+        </h1>
+        <div>
+            <h2>
+                일출 당시: {{ weather.temp }}°C
+            </h2>
+            <div>
+                <span>
+                    <img width="16px" src="{% static 'base/icons/droplet-solid.svg' %}"> {{ weather.humidity }}%
+                </span>
+                <span>
+                    <img width="16px" src="{% static 'base/icons/wind-solid.svg' %}"> {{ weather.wind }}m/s
+                </span>
+                <span>
+                    기압: {{ weather.pressure }}hPa
+                </span>
+            </div>
+        </div>
+        <h1>
+            {% if is_cloudsea == 1%}
+                운해를 볼 수 있습니다!
+            {% else %}
+                운해를 보기 힘듭니다ㅠ
+            {% endif %}
+        </h1>
+    </div>
+
 {% endblock %}

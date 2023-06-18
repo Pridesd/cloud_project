@@ -2,4 +2,27 @@
 {% load static %}
 
 {% block main_area %}
+    <div class="info-forecast-list-container">
+        {% for forecast in forecast_list %}
+            <div class="info-forecast-container">
+                <h1>{{ forecast.dt }}</h1>
+                <div class="info-today-weather">
+                    <div class="info-today-temp">
+                        <img src="{{ forecast.icon }}" alt="{{ forecast.main }}">
+                        <h2>
+                            {{ forecast.temp }}°C
+                        </h2>
+                    </div>
+                    <div>
+                        <span>
+                            <img width="16px" src="{% static 'base/icons/droplet-solid.svg' %}"> {{ forecast.humidity }}%
+                        </span>
+                        <span>
+                            <img width="16px" src="{% static 'base/icons/wind-solid.svg' %}"> {{ forecast.wind_speed }}m/s {{ forecast.wind_deg }}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}

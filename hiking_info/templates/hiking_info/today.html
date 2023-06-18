@@ -2,5 +2,27 @@
 {% load static %}
 
 {% block main_area %}
-    {{ weather.main }}
+    <div class="info-today-container">
+        <h1>{{ weather.dt }}</h1>
+        <div class="info-today-weather">
+            <div class="info-today-temp">
+                <img src="{{ weather.icon }}" alt="{{ weather.main }}">
+                <h2>
+                    {{ weather.temp }}°C
+                </h2>
+            </div>
+            <div>
+                <span>
+                    <img width="16px" src="{% static 'base/icons/droplet-solid.svg' %}"> {{ weather.humidity }}%
+                </span>
+                <span>
+                    <img width="16px" src="{% static 'base/icons/wind-solid.svg' %}"> {{ weather.wind_speed }}m/s {{ weather.wind_deg }}
+                </span>
+            </div>
+            <div>
+                <span>일출 시간 {{ weather.sunrise }}</span>
+                <span>일몰 시간 {{ weather.sunset }}</span>
+            </div>
+        </div>
+    </div>
 {% endblock %}

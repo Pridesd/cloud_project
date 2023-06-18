@@ -28,5 +28,47 @@
 
 .hiking-info-icon{
     width: 100px;
-    transition: all 0.5s ease-in;
+    transition: all 0.3s ease-in;
+}
+
+/*###############*/
+/*### 오늘의 날씨###*/
+/*###############*/
+
+.info-today-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.info-today-weather{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem    ;
+}
+
+.info-today-temp{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.info-forecast-list-container{
+    display: flex;
+    gap: 3rem;
+    align-items: center;
+    height: 100%;
+    overflow-x: scroll;
+}
+
+.info-forecast-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: auto;
 }

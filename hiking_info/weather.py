@@ -7,8 +7,8 @@ import numpy as np
 
 #북한산 인근 지역으로 기상 정보를 가지고 옴
 appid = "dd067a9aa888d5941ce0662190c0a2f4"
-forecast_url = "http://api.openweathermap.org/data/2.5/forecast?lat=37.6387&lon=127.0370&appid="+ appid +"&units=metric"
-current_url = "https://api.openweathermap.org/data/2.5/weather?lat=37.6387&lon=127.0370&units=metric&appid="+appid
+forecast_url = "http://api.openweathermap.org/data/2.5/forecast?lat=37.6387&lon=127.0370&appid=" + appid + "&units=metric"
+current_url = "https://api.openweathermap.org/data/2.5/weather?lat=37.6387&lon=127.0370&units=metric&appid=" + appid
 
 def get_forecast():
     response = requests.get(forecast_url)
@@ -26,6 +26,27 @@ def get_weather():
 
     return json_object
 
+def get_wind_deg(deg):
+    if 0<= deg < 22.5 or 337.5 <= deg <= 360:
+        return "북풍"
+    elif 22.5 <= deg < 67.5:
+        return "북동풍"
+    elif 67.5 <= deg < 112.5:
+        return "동풍"
+    elif 112.5 <= deg < 157.5:
+        return "남동풍"
+    elif 157.5 <= deg < 202.5:
+        return "남풍"
+    elif 202.5 <= deg < 247.5:
+        return "남서풍"
+    elif 247.5 <= deg < 292.5:
+        return "서풍"
+    else:
+        return "북서풍"
+
+def get_hour(time_string):
+    return time_string.strftime("%H:%M")
+
 def is_cloudsea():
     forecast_list = get_forecast()
 
@@ -42,6 +63,10 @@ def is_cloudsea():
 
     df = pd.DataFrame(index=[1])
     pre_temp = 0
+    temp = 0
+    wind = 0
+    humidity = 0
+    pressure = 0
 
     for forecast in forecast_list:
 
@@ -58,12 +83,12 @@ def is_cloudsea():
                 new_columns = ['Previous Temperature', 'Previous Precipitation', 'Previous Humidity',
                               'Previous Pressure']
                 pre_temp = float(forecast['main']['temp'])
-                rain = 0
-                humidity = forecast['main']['humidity']
-                pressure = forecast['main']['pressure']
+                pre_rain = 0
+                pre_humidity = forecast['main']['humidity']
+                pre_pressure = forecast['main']['pressure']
                 if forecast['weather'][0]['main'] == 'Rain':
-                    rain = forecast['rain']['3h']
-                df[new_columns] = pd.Series([pre_temp, rain, humidity, pressure])
+                    pre_rain = forecast['rain']['3h']
+                df[new_columns] = pd.Series([pre_temp, pre_rain, pre_humidity, pre_pressure])
                 continue
 
             if daytime == sunrise:
@@ -95,4 +120,12 @@ def is_cloudsea():
     xgbc = joblib.load('learning_model/xgbc.pkl')
     final_pred = xgbc.predict(stacked)
 
-    return final_pred[0]
+    return {
+        "is_cloud": final_pred[0],
+        "weather": {
+            "temp": temp,
+            "wind": wind,
+            "humidity": humidity,
+            "pressure": pressure
+        }
+    }
