@@ -13,11 +13,18 @@
                 <label for="content">내용</label>
                 <textarea name="content" >{{ post.content }}</textarea>
             </div>
-            <div>
-                <img width="300px" src="{{ post.image.url }}">
-                <label for="image">이미지를 바꾸고 싶다면 파일을 첨부해주세요!</label>
-                <input type="file" name="image" accept=".png, .jpg, .jpeg">
-            </div>
+            {% if post.image %}
+                <div>
+                    <img width="300px" src="{{ post.image.url }}">
+                    <label for="image">이미지를 바꾸고 싶다면 파일을 첨부해주세요!</label>
+                    <input type="file" name="image" accept=".png, .jpg, .jpeg">
+                </div>
+            {% else %}
+                <div>
+                    <label for="image">이미지 첨부</label>
+                    <input type="file" name="image" accept=".png, .jpg, .jpeg">
+                </div>
+            {% endif %}
             <div>
                 <div>
                     <label for="date">산행 날짜</label>

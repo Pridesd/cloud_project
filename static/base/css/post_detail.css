@@ -1,0 +1,101 @@
+.hiking-route-post-container{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 2rem 15rem;
+    overflow-y: scroll;
+}
+
+.post-btn-box{
+    display: flex;
+    width: 100%;
+    gap: 1.25rem;
+    justify-content: flex-end;
+}
+
+.post-info{
+    width: 100%;
+}
+
+.post-info-header{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.post-info-content{
+    box-sizing: border-box;
+    margin-top: 1.25rem;
+    padding-bottom: 1.25rem;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    align-items: center;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.post-info-content-text{
+    font-size: 1.125rem;
+}
+
+.post-img{
+    width: 300px;
+}
+
+.post-footer{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.post-comment-box{
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.3);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.post-comment-form{
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+}
+
+.comment-list{
+    margin-top: 1rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2rem;
+}
+
+.comment-box{
+    box-sizing: border-box;
+    width: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    padding: 1rem 2rem;
+    border-radius: 10px;
+}
+
+.comment-header{
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.right{
+    align-items: flex-start;
+}
+
+.mt-1{
+    margin-top: 1rem;
+}

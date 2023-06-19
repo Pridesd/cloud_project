@@ -2,15 +2,89 @@
 {% load static %}
 
 {% block main_area %}
-    <ul class="messages">
-        {% for message in messages %}
-            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-        {% endfor %}
-    </ul>
-    {% if post.author == user and user.is_authenticated %}
-        <a href="{% url 'edit_post' post.pk %}">업데이트</a>
-        <a href="{% url 'delete_post' post.pk %}">삭제하기</a>
-    {% endif %}
-    <h1>{{ post.title }}</h1>
-    <a href="{% url 'participate' post.pk %}">참여하기</a>
+    <div class="hiking-route-post-container">
+        <ul class="messages">
+            {% for message in messages %}
+                <h2{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}<h2/>
+            {% endfor %}
+        </ul>
+        {% if post.author == user and user.is_authenticated %}
+            <div class="post-btn-box">
+                <a class="btn post-btn" href="{% url 'edit_post' post.pk %}">업데이트</a>
+                <a class="btn post-btn" href="{% url 'delete_post' post.pk %}">삭제하기</a>
+            </div>
+        {% endif %}
+        <div class="post-info">
+            <div class="post-info-header">
+                <h1 class="post-info-title">{{ post.title }}</h1>
+                <div class="post-sub">
+                    <span>작성자: {{ post.author }}</span>
+                    <span>작성시간: {{ post.updated_at }}</span>
+                </div>
+            </div>
+            <div class="post-info-content">
+                <div class="post-info-content-text">
+                    {{ post.content }}
+                </div>
+                <div class="post-info-content-img">
+                    {% if post.image %}
+                        <img class="post-img" src="{{ post.image.url }}">
+                    {% else %}
+                        <img class="post-img" src="{% static 'base/image/amada_black.png' %}">
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="post-footer">
+            <div class="post-sub right mt-1">
+                <spa>{{ post.date }}에 만나</spa>
+                <span>{{ post.start_point }}에서 모여</span>
+                <span>{{ post.end_point }}에서 끝납니다</span>
+                <span>전체 {{ post.max_member }}명중 {{ post.participate_set.count }}명 모였습니다.</span>
+            </div>
+            {% if user != post.author %}
+                <a class="btn post-btn" href="{% url 'participate' post.pk %}">참여하기</a>
+            {% else %}
+                <div class="post-sub">
+                    <span>현재 참가자</span>
+                    {% for part in post.participate_set.iterator %}
+                        {{ part.author }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+        </div>
+        <div class="post-comment-box">
+              <h2 class="post-comment-title">댓글을 남겨보세요</h2>
+              <div>
+                <form class="post-comment-form" method="POST" action="{{ post.get_absolute_url }}/add_comment/">
+                    {% csrf_token %}
+                  <div>
+                    {{ comment_form }}
+                  </div>
+                  <button class="btn" type="submit">댓글 달기</button>
+                </form>
+              </div>
+              <div class="comment-list">
+                {% if post.comment_set.exists %}
+                  {% for comment in post.comment_set.iterator %}
+                      <div class="comment-box">
+                          <div class="comment-header">
+                              <h5>
+                                  {{ comment.author }}
+                                  {% if comment.author == post.author %}
+                                      <span>(글쓴이)</span>
+                                  {% endif %}
+                              </h5>
+                              {% if user == comment.author %}
+                                    <a href="{% url 'delete_comment' comment.pk %}"><img width="16px" src="{% static 'base/icons/trash-can-regular.svg' %}"></a>
+                              {% endif %}
+                          </div>
+                          <p>{{ comment.content }}</p>
+                      </div>
+                  {% endfor %}
+                {% endif %}
+              </div>
+        </div>
+    </div>
 {% endblock %}

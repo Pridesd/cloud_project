@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 
-from .models import Post, Participate
+from .forms import CommentForm
+from .models import Post, Participate, Comment
 
 
 # Create your views here.
@@ -24,7 +25,8 @@ def post_detail(request, pk):
         request,
         'hiking_routes/post_detail.html',
         {
-            'post': post
+            'post': post,
+            'comment_form': CommentForm
         }
     )
 
@@ -113,3 +115,20 @@ def participate(request, pk):
     messages.error(request, "참여할 수 없습니다")
     return redirect('detail', pk)
 
+def add_comment(request, pk):
+    if request.method == 'POST' and request.user.is_authenticated:
+        post = get_object_or_404(Post, pk=pk)
+        comment_form = CommentForm(request.POST)
+        comment_temp = comment_form.save(commit=False)
+        comment_temp.post = post
+        comment_temp.author = request.user
+        comment_temp.save()
+    else:
+        raise PermissionError
+    return redirect(post.get_absolute_url())
+
+def delete_comment(request, pk):
+    comment = Comment.objects.get(pk=pk)
+    if request.user.is_authenticated and request.user == comment.author:
+        comment.delete()
+    return redirect('detail', comment.post.pk)

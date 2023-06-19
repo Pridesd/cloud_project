@@ -19,6 +19,11 @@
     gap: 1rem;
 }
 
+.logined{
+    flex-direction: row;
+    justify-content: space-around;
+}
+
 .intro-image{
     opacity: 0;
     animation: intro 1s 1s forwards;
@@ -36,4 +41,21 @@
     opacity: 0;
     animation-delay: 2s;
     animation: intro 2s 3s forwards;
+}
+
+.intro-list-box{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+}
+
+.intro-el-box{
+    padding: 0.725rem;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    min-width: 400px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }

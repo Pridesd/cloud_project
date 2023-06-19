@@ -3,6 +3,8 @@
 @import "intro.css";
 @import "hiking_info.css";
 @import "post.css";
+@import "hiking_route.css";
+@import "post_detail.css";
 
 *{
     font-family: 'Black Han Sans', sans-serif;

@@ -33,6 +33,4 @@ class Comment(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f'{self.author} - {self.content}' #f는 포맷티드 문자열을 의미
-    def get_absolute_url(self):
-        return f'{self.post.get_absolute_url()}#comment-{self.pk}'
+        return f'{self.author} - {self.content}'

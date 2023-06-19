@@ -3,6 +3,33 @@
 
 {% block main_area %}
     {% if user.is_authenticated %}
+        <div class="intro-box logined">
+            <div class="intro-list-box">
+                <h2>내 게시글</h2>
+                {% if recent_post %}
+                    {% for post in recent_post %}
+                        <div class="intro-el-box">
+                            <a href="{{ post.get_absolute_url }}"><h3>{{ post.title }}</h3></a>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <p>글이 존재하지 않습니다</p>
+                {% endif %}
+            </div>
+            <div class="intro-list-box">
+                <h2>참가 신청한 모임</h2>
+                {% if participated_list %}
+                    {% for post in participated_list %}
+                        <div class="intro-el-box">
+                            <a href="{{ post.get_absolute_url }}"><h3>{{ post.title }}-{{ post.author }}</h3></a>
+                            <p>산행일: {{ post.date }}</p>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <p>글이 존재하지 않습니다</p>
+                {% endif %}
+            </div>
+        </div>
     {% else %}
         <div class="intro-box">
             <img class="intro-image" src="{% static 'base/image/amada_black.png' %}" height="250px">
