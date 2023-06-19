@@ -2,10 +2,43 @@
 {% load static %}
 
 {% block main_area %}
-    <div>
-        <form enctype="multipart/form-data" action="{% url 'create_post' %}">
+    <div class="post-form-container">
+        <h2>동행 게시글 작성하기</h2>
+        <form class="post-form" method="POST" enctype="multipart/form-data" action="{% url 'create_post' %}">
             {% csrf_token %}
-
+            <div>
+                <label for="title">제목</label>
+                <input type="text" maxlength="50" name="title">
+            </div>
+            <div>
+                <label for="content">내용</label>
+                <textarea name="content" ></textarea>
+            </div>
+            <div>
+                <label for="image">이미지 첨부</label>
+                <input type="file" name="image" accept=".png, .jpg, .jpeg">
+            </div>
+            <div>
+                <div>
+                    <label for="date">산행 날짜</label>
+                    <input type="date" name="date">
+                </div>
+                <div>
+                    <label for="max_member">최대 산행 인원</label>
+                    <input  type="number" min="1" name="max_member">
+                </div>
+            </div>
+            <div>
+                <div>
+                    <label for="start_point">집결지</label>
+                    <input type="text" name="start_point" maxlength="30" >
+                </div>
+                <div>
+                    <label for="start_point">해산지</label>
+                    <input type="text" name="end_point" maxlength="30" >
+                </div>
+            </div>
+            <button class="btn" type="submit">제출하기</button>
         </form>
     </div>
 {% endblock %}

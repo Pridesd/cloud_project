@@ -11,7 +11,7 @@ class Post(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     max_member = models.IntegerField(default=1, validators=[MinValueValidator(1)])
-    date = models.DateField(max_length=50, null=False, blank=False)
+    date = models.CharField(max_length=50, null=False, blank=False)
     start_point = models.CharField(max_length=30)
     end_point = models.CharField(max_length=30)
 
@@ -23,3 +23,16 @@ class Post(models.Model):
 class Participate(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
+
+class Comment(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    content = models.TextField()
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f'{self.author} - {self.content}' #f는 포맷티드 문자열을 의미
+    def get_absolute_url(self):
+        return f'{self.post.get_absolute_url()}#comment-{self.pk}'

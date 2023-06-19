@@ -2,10 +2,43 @@
 {% load static %}
 
 {% block main_area %}
-    <div>
-        <form enctype="multipart/form-data" action="{% url 'update_post' post.pk %}">
+    <div class="post-form-container">
+        <form class="post-form" method="POST" enctype="multipart/form-data" action="{% url 'update_post' post.pk %}">
             {% csrf_token %}
-
+            <div>
+                <label for="title">제목</label>
+                <input value="{{ post.title }}" type="text" maxlength="50" name="title" >
+            </div>
+            <div>
+                <label for="content">내용</label>
+                <textarea name="content" >{{ post.content }}</textarea>
+            </div>
+            <div>
+                <img width="300px" src="{{ post.image.url }}">
+                <label for="image">이미지를 바꾸고 싶다면 파일을 첨부해주세요!</label>
+                <input type="file" name="image" accept=".png, .jpg, .jpeg">
+            </div>
+            <div>
+                <div>
+                    <label for="date">산행 날짜</label>
+                    <input type="date" name="date"  value="{{ post.date }}">
+                </div>
+                <div>
+                    <label for="max_member">최대 산행 인원</label>
+                    <input  type="number" min="1" name="max_member" value="{{ post.max_member }}">
+                </div>
+            </div>
+            <div>
+                <div>
+                    <label for="start_point">집결지</label>
+                    <input type="text" name="start_point" maxlength="30" value="{{ post.start_point }}">
+                </div>
+                <div>
+                    <label for="start_point">해산지</label>
+                    <input type="text" name="end_point" maxlength="30" value="{{ post.end_point }}">
+                </div>
+            </div>
+            <button class="btn" type="submit">제출하기</button>
         </form>
     </div>
 {% endblock %}
